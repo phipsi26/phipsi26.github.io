@@ -21,13 +21,13 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            max-width: 400px;
+            max-width: 440px;
             width: 100%;
         }
         h2 { color: #333; margin-bottom: 24px; font-weight: 600; }
         input[type="email"] {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -40,90 +40,151 @@
             background-color: #0070f3;
             color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
             border-radius: 6px;
             font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
         }
+        button:hover { background-color: #0051a8; }
         .result-box {
             margin-top: 24px;
             padding: 16px;
             border-radius: 6px;
             display: none;
             font-size: 16px;
+            word-break: break-all;
         }
         .success { background-color: #e6f7ed; color: #137333; border: 1px solid #c2e7d9; }
         .error { background-color: #fce8e6; color: #c5221f; border: 1px solid #fad2cf; }
-        .code-display { font-size: 24px; font-weight: bold; display: block; margin-top: 8px; }
+        .code-display { font-size: 20px; font-weight: bold; display: block; margin-top: 8px; color: #111; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Retrieve Your Code</h2>
-    <input type="email" id="emailInput" placeholder="Enter your email address" required>
+    <h2>Retrieve Your Credentials</h2>
+    <input type="email" id="emailInput" placeholder="Enter your registered email address" required>
     <button onclick="lookupAndDecrypt()">Get Code</button>
     <div id="result" class="result-box"></div>
 </div>
 
 <script>
-    // ⚠️ CRITICAL: Replace these examples with your own data.
-    // Key: SHA-256 Hash of the email
-    // Value: AES Encrypted Code (using the raw email string as the secret password)
+    // AUTOMATICATED CRYPTOGRAPHIC DATABASE INJECTION FROM R
     const database = {
-        // "user1@example.com" -> Code "ABC-123-XYZ" encrypted with password "user1@example.com"
-        "b4c9a2893130e6de41f32e3612d627fb3d12bfcbdf0fbfcb6cd1433b93f1ef17": "U2FsdGVkX19lQZ5YQ61mGscH47SiaHovM+GfBmsw+74=",
-        
-        // "test@domain.com" -> Code "CODE-HELLOWORLD" encrypted with password "test@domain.com"
-        "1c69c6cf72a50c8227f272a8069f2e7c4f4a9b400902c38ed399b6f849641772": "U2FsdGVkX1+v+k3vX99lWwZ0Zf0B1HjGv+7ZqR4tOnM="
-    };
+  "49905165fdb77cc4215fa8b70ba2f654ef8ebc94754e0e0bc9e0afc614f62c7d": "fMOArpvCdQgmrBVK0JB+UHo+UKNI8pXXSzpy1FbnN4M=",
+  "185a336e0494b6ec734f053a8e33853658c371b95558852cffeaefadf37711aa": "3UuB4SKkTd6dv5f9NDYA2QGjeHH0Q2D5YYXhtthiMoI=",
+  "13d7fb80631fd375de2ba83232a75538de27a0048912019b02d3b02e57ccdc6e": "GsU3TzfDPSdO1/SeC2aWaFviQwrrvCcrFJiNtjVUTPE=",
+  "ebf2c2e1e5f5041f740ecad1fd5cd7d3d152d306e6988a5f86e105dc17ddd493": "JEZAdM2ol1SlOKcZ3Vrm88+B814HDVsRR2BMWrp0HcU=",
+  "de97c8155342226a81dfa0737ac1e4bfc3ba6f74e649ffd4b9e8c89867f3dbb1": "4D4cssZ9Ha5oZpzoU3jotxOQE7IRbd6Xi0gV32Zl1oI=",
+  "d1204d6c05ebe1cd2651f174c9f7dd6b984114c13b9896a5ddd6f6aadc08e9a8": "FfyPAmXix5BefcMEoy/WwkBAKWtDW6S7grOxrL3V79w=",
+  "0ead8defe40f83393589548d28bb13db7de4234109aa135374f2c45fd5609076": "LLASjCV3xK6cmxZzA28EnkkZhpR39s17f/GJ1c0QKxc=",
+  "5f30bbf074ab1c8933a35ab43eb11f41a217251639536f5f306cb8ce03c0d37a": "HbQOeT+NXwjXS+AoMaMgeUvfgjaTRA7IhxtzH8KQu68=",
+  "8dde65a2e38df435f0ce041d6de9b76b5a9ddf1af8561c9055c5a2e015d558a2": "w1M+aEvpTQ/j0WjzYLbqw5DZoefBSvlWUE1WjXK2yJQ=",
+  "742f1a98ad39ee863bcafe5dc5ca8b9eb74e06c8021fb924643b7dc0da978803": "H+QtbmDS+L/G9s08tFc+Ya6WRZxDI2wXCFf021RhVwk=",
+  "099ef427e616d53167c7524c65b4e6a842a2e377990fc047f3a4097acd033d6c": "dpcsU0LrZniHZ5QH6wob1hfnOiYDM1FExfVR/77bnmE=",
+  "947e356ad18241fff75670716cdef2414f11c94e9e31091af37ef46486ad6d73": "2RW1nlWqM86dpAYb/fDhdDSuOfMlUOXPlaoEFjqGSHk=",
+  "471f9cfbdf5cb68f49619fe44f9164dcbb65ffc0878a0d7bb2de1dea6631c882": "1zX8Nkb0gzGZHePIc+1patXbrAKq8ijW/DzofD+KxVo=",
+  "7e2a68f7de80a24460ab398aa2741565f005cb660f85e5ceb7bc871b4d349979": "7mIwSzmyJWVW/HT+LLPtZZu5MuLyJ81J0iLBeGWigx4=",
+  "7d994eb048d2a0dbc32854463165d641f236d081fded4922b07c37c6b085a868": "wwoMyPZ3M6pm3hk+d5eTEHDr02qYW8A1JuhnDJnRj1E=",
+  "a1fa8bfbb71c7cdb9dbc723363e88fe216010f1abe483e20ce1bc2f085d3fdf2": "oMCqBq6nU5tBhiA5N1PIqB/BWbX33GMZ8P5KLhyTMeg=",
+  "94a83e63b471a91b8dddd6ca7d21b774362f115cd58f1f94145332f8b9dec66a": "liJBNO0faptJTdvMQOrz6z0DeVD9tqIcvk4iYEFwrhA=",
+  "1886b9eea2bb110a767d49e5b8930712e18867d00bac84f96728b4668e24c831": "RBRXGEaKXCTHVdtu/WwiOTCbArq/GuFX+IbofIrAvfI=",
+  "18059f8960bb65eb9bc81e4655f8ea0a005be4340e34ed48fe27fa184960c2e1": "Jqjs4UV2Me7IWm1GfN2V9agrdio5OPXS/pxv1k8DQ4Y=",
+  "b30fc4247a496bce08a88f7e9b2550571f2c919958f27456467f037d01417e20": "iycg/4Dq/2/D6IvR1DbinY3QJKINwPUaL/96O0m1Kvs=",
+  "0fad4fba6f98333599d8cd2500ae45ebaf59c4eb9891fbfb80fae897ed5fb72c": "5YLotULuXb1WVyAxENDwL12xTI8/KVcck0iQs8nabbM=",
+  "286dc55b45107549102077b0afedc96fdd16db406d335b60e9ccfe02d6f257d8": "pqKNKU76VJ0hr/ipkBK+FHU3D66F9DnEpF6VLVvuWns=",
+  "974a66a650ecb69352c43da2aaaae7bafb78323292627151759e28295de88a8b": "n+hMtA0cWYFKINOO0ULBSP7SpADPxNAyAZn/zmZxCIs=",
+  "2412367bebff3d2c36b03d64c1758db1c543f5378372927acd4703b4d6182a2c": "DK9+dTompn2j8PhgnJY80nKg+gkIH2rCu2XaOtc1lLo=",
+  "de05a11936821f964bfc2461fa8b2ec3a3d0a152579fa95af67391dbf3680c86": "GZWEpRw+wpOcU1Hg4oLefeCETVroT8xWAMVvTdB00fc=",
+  "e0119ca9c875e9942640429f1c5e6bcf05064f3c18d4a10dfd34a16004da4d2c": "V48aV30FouV3fsO81uKGB8lOf9HYivsXhQCwEnG/cMQ=",
+  "c2461938d39578537964d29b73265045ddf41c4383f7b4ff0c741c6f43f8f695": "NaQXnphk9IVAqoInZ3SlVrNTICCbYtA3NgqNfd+eQ+Q=",
+  "a98021658fdee3fe80e8fc1a28a03457343a7609d6ec2377f711b3433657bb1f": "MxXbFPhWTXRplnK5/EQuo9XtSRmxJhlFAiIv2AiBazI=",
+  "153d31d200fbf1b8ae9982854cab19a4335e35954b03b0f2b34ff9bd9838c66c": "NF17pSIqeAfkAkaAHcbV/c1AQlIgLCHz6Xpwd5IFFdA=",
+  "5b5cec646aa04185697bbf9ffb97d35f84a76a022f92befacd463237342c88b7": "/71IxUFKl7RxqrPOt8eCSGRkCXQhJVbqT86G7Btc4OY=",
+  "675fb2d68ac1b3f58d4299260588ba1829be92159fed1580431aafca5593fc3a": "X8R/DCiYuTTDWpZhQup2vDWlXQdZ247yXtrUnIsdcoM=",
+  "0857880a68168fcae41115ac939298ba16f1bd4a96768777954280558e39890b": "9ML8IkgEKMKvYgk501Jlv60uypVG/eQmEqasv125+Dg=",
+  "a1d17f4c8356bb276267d4db690176541ebb8882541c347f564e58854335a100": "jLSt2Q2rsioglpcGFe5YHuoPiIJ4Gbmkb6YGLJYl89E=",
+  "9d8981fd735b1dc81a1c513a2a3673a654dd9f8c2b426f2b9698e3715a781b11": "LAssPoJL3erBvRfwAghGwyc/AyZerxbswO1Krcc+gxA=",
+  "4eff9d670bbf5129676dbdf333f3c70dc2995db4475c95f0e60b3169432c2622": "9J6VM78YzaZf4fCH+gTEbwX8Al9J2iow58TSp+GA940=",
+  "ceb731455c59891c4d6d5dee86bdd1e9d5c6b8b2d5f491bf0ddb4cd391feaa01": "2VeFKne2gnK0D+tqyv/QFcEik0ljL1LMZqnOxo52jTU=",
+  "74e4604a4beadfe98118ec11b28f41f14b79e8ae9d43159eb538b78e9236b329": "xCDd8xRXyn+ZnaL+ziDizeh4HDf/Mt5K7HA6l0W5UlY=",
+  "4c531a233f7c7c74222888c3818e9af220c9b838120ea487b87e41179694f273": "GR7y9uGzD1T8PY37UFuYwduGc8tVYiwmYxfeSY2ykYo=",
+  "9dddc73044adf6e5eebd30e1973b990faf86960c0f91c365203afb5b8ebc7bd4": "Pi2xcVNmsbAeKJo1sZWCY/FphI2fBSWmuWAO58nZZ+M=",
+  "892656464a271297c6869380eb9b591c9904e5d1ee3ad03daa3aa259ce844659": "O0axP0fRHFW3Fbx5dLpS76VuBMeIppYVNkezj9r6iJ0=",
+  "aea55ad4a69b3e3bd97842ba083e009d642efa013a9f5f45b8300ee8a2b4730d": "a/Hb1JcvgBtftKQcuwgXAEako5ITBtgzT+CpL8lHTZI=",
+  "8818ab68a63b9e8d10d32008370b4483e10a01889f5138b517120377420a6d01": "berGY+OsCsJmYd1voX1gsm2lITE9jABrppyOVU6WYXE=",
+  "c16da5d9d89736053587fdffb007c807ad035fad1dc32a8c0afd831de229a9a1": "VDE3oevYmxfrpdM8YzJrGmTYl6sApwnTINR+t/dMd1E=",
+  "66563b148b3d77097d34acf2c6b8f2bdce7516fc6159f8c32ad8fc1e038dc881": "VJB9SDCUSGIkLMIe2DR728P/q+BlaKrAUmUw47+Bed4=",
+  "54b4ed6b9dbc25facac4aa219dc0623a62fa06af0f4e2f22b4fa716c00f35184": "u2HDQ1jhA4JiJFrnPic0y1MCxK+7tdr4RUIsrxoRPhc=",
+  "b619a64543e59b1625e416cf5392c90d6477cc9ce29f26d57d7d3c139b81fef8": "v5bgQ7tWg0RDqPR8cbOkJyi8nxP5jG66eqvFGzrGOj8=",
+  "63dc8d91ed42de37f53583e4e254ace7c708d362432d6225817bb6b9fc8128ed": "WtLEITXPqL+GAsojgVyY3T9eYamoy4JzDfJHCYRUK9o=",
+  "751a252656f8a98d3b4864b0ba83925b1f1ccf4693d3e74a28aee95b9d0f0a43": "eOcY8aY9N7hogyLjuNkI71DvwLiYpTfmKWxm8xsh0mc=",
+  "150b8ec293a25038cc76ce87609de45b60820c0157b6003aa5932e2427960f80": "tQDv3n2CUOhPRTbfYom9cVpoF4O+9E79xAN0Z6KoEP8=",
+  "fb67538adfd875f0b474a326d2a31baef7de9b8ad0bca837b7693d4b058c9dbb": "WHzWdnucbh3BVCMnCBOv8EQ5O6Dhg7yCqMyV5tACBMA=",
+  "d9d893e23ce6c98de75f7304556564104ec2cb12f03180dc26951e6a16e997dd": "Y628W0Vlwqe4USiHydGI3geoZGhXQqeg3LP380SNNAY=",
+  "04ea9e4a98210206de4cc1d8b04910433062c533b8b3ef20569aebdf59e096fe": "y3id2qRfyQX8SthgrUUkTizFUUDelyGpz8Awrw/iiWI=",
+  "8b973ba8e338864791c9ac86bc6c60b1a36bbad540e44dc9b122de95294cd963": "L1hrO/ZrJvXz8ZauxDuJcPxwHkizHfQzaSfomwP4J5k=",
+  "0df9fd624915fd2a836a042794fe6e1082692da85e2b698e388bc25dfd7c7dbe": "iEkpolW0CT4D7FGmef+58IUS75IIiRlW1ilzvCoz+Us=",
+  "e000ffee0f409e5b73835d3dde94774a0a53e1d785903cd82c878d72bc99ce18": "4BBy9wyVBFjd2HOyn7qEs7Ae5r+JQFCmRRq4X3BBNPg="
+};
 
     function lookupAndDecrypt() {
-        const rawEmail = document.getElementById('emailInput').value.trim().toLowerCase();
-        const resultBox = document.getElementById('result');
+        const rawEmail = document.getElementById("emailInput").value.trim().toLowerCase();
+        const resultBox = document.getElementById("result");
 
         resultBox.style.display = "none";
         resultBox.className = "result-box";
 
         if (!rawEmail) {
             resultBox.innerHTML = "Please enter an email address.";
-            resultBox.classList.add('error');
+            resultBox.classList.add("error");
             resultBox.style.display = "block";
             return;
         }
 
-        // 1. Hash the input email to find the correct database row key
+        // 1. Hash the user input to look up the object key row
         const hashedEmail = CryptoJS.SHA256(rawEmail).toString();
 
         if (database.hasOwnProperty(hashedEmail)) {
-            const encryptedCode = database[hashedEmail];
+            const base64EncryptedPayload = database[hashedEmail];
 
             try {
-                // 2. Attempt to decrypt the text payload using the raw email as the password
-                const bytes = CryptoJS.AES.decrypt(encryptedCode, rawEmail);
-                const decryptedCode = bytes.toString(CryptoJS.enc.Utf8);
+                // 2. Format browser key matching the exact SHA256 key configuration compiled in R
+                const key = CryptoJS.SHA256(rawEmail);
+                const cipherParams = CryptoJS.lib.CipherParams.create({
+                    ciphertext: CryptoJS.enc.Base64.parse(base64EncryptedPayload)
+                });
+
+                // 3. Decrypt on-the-fly using AES-CBC matching engine specs
+                const decrypted = CryptoJS.AES.decrypt(cipherParams, key, {
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7,
+                    iv: key 
+                });
+
+                const decryptedCode = decrypted.toString(CryptoJS.enc.Utf8);
 
                 if (decryptedCode) {
-                    resultBox.innerHTML = `Your code is: <span class="code-display">${decryptedCode}</span>`;
-                    resultBox.classList.add('success');
+                    resultBox.innerHTML = `Your registration details: <span class="code-display">${decryptedCode}</span>`;
+                    resultBox.classList.add("success");
                 } else {
-                    throw new Error("Decryption failed");
+                    throw new Error();
                 }
             } catch (error) {
-                // Catches if the crypto library fails to resolve the string
-                resultBox.innerHTML = "Security error matching records.";
-                resultBox.classList.add('error');
+                resultBox.innerHTML = "Decryption protocol mismatch error.";
+                resultBox.classList.add("error");
             }
         } else {
-            resultBox.innerHTML = "No code found matching that email address.";
-            resultBox.classList.add('error');
+            resultBox.innerHTML = "No credentials found matching that email address.";
+            resultBox.classList.add("error");
         }
 
         resultBox.style.display = "block";
     }
 
-    document.getElementById('emailInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') lookupAndDecrypt();
+    document.getElementById("emailInput").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") lookupAndDecrypt();
     });
 </script>
 
