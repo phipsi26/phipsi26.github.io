@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Code Lookup</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 { color: #333; margin-bottom: 24px; font-weight: 600; }
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 16px;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result-box {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 6px;
+            display: none;
+            font-size: 16px;
+        }
+        .success { background-color: #e6f7ed; color: #137333; border: 1px solid #c2e7d9; }
+        .error { background-color: #fce8e6; color: #c5221f; border: 1px solid #fad2cf; }
+        .code-display { font-size: 24px; font-weight: bold; display: block; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Retrieve Your Code</h2>
+    <input type="email" id="emailInput" placeholder="Enter your email address" required>
+    <button onclick="lookupAndDecrypt()">Get Code</button>
+    <div id="result" class="result-box"></div>
+</div>
+
+<script>
+    // ⚠️ CRITICAL: Replace these examples with your own data.
+    // Key: SHA-256 Hash of the email
+    // Value: AES Encrypted Code (using the raw email string as the secret password)
+    const database = {
+        // "user1@example.com" -> Code "ABC-123-XYZ" encrypted with password "user1@example.com"
+        "b4c9a2893130e6de41f32e3612d627fb3d12bfcbdf0fbfcb6cd1433b93f1ef17": "U2FsdGVkX19lQZ5YQ61mGscH47SiaHovM+GfBmsw+74=",
+        
+        // "test@domain.com" -> Code "CODE-HELLOWORLD" encrypted with password "test@domain.com"
+        "1c69c6cf72a50c8227f272a8069f2e7c4f4a9b400902c38ed399b6f849641772": "U2FsdGVkX1+v+k3vX99lWwZ0Zf0B1HjGv+7ZqR4tOnM="
+    };
+
+    function lookupAndDecrypt() {
+        const rawEmail = document.getElementById('emailInput').value.trim().toLowerCase();
+        const resultBox = document.getElementById('result');
+
+        resultBox.style.display = "none";
+        resultBox.className = "result-box";
+
+        if (!rawEmail) {
+            resultBox.innerHTML = "Please enter an email address.";
+            resultBox.classList.add('error');
+            resultBox.style.display = "block";
+            return;
+        }
+
+        // 1. Hash the input email to find the correct database row key
+        const hashedEmail = CryptoJS.SHA256(rawEmail).toString();
+
+        if (database.hasOwnProperty(hashedEmail)) {
+            const encryptedCode = database[hashedEmail];
+
+            try {
+                // 2. Attempt to decrypt the text payload using the raw email as the password
+                const bytes = CryptoJS.AES.decrypt(encryptedCode, rawEmail);
+                const decryptedCode = bytes.toString(CryptoJS.enc.Utf8);
+
+                if (decryptedCode) {
+                    resultBox.innerHTML = `Your code is: <span class="code-display">${decryptedCode}</span>`;
+                    resultBox.classList.add('success');
+                } else {
+                    throw new Error("Decryption failed");
+                }
+            } catch (error) {
+                // Catches if the crypto library fails to resolve the string
+                resultBox.innerHTML = "Security error matching records.";
+                resultBox.classList.add('error');
+            }
+        } else {
+            resultBox.innerHTML = "No code found matching that email address.";
+            resultBox.classList.add('error');
+        }
+
+        resultBox.style.display = "block";
+    }
+
+    document.getElementById('emailInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') lookupAndDecrypt();
+    });
+</script>
+
+</body>
+</html>
