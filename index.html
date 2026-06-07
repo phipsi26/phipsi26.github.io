@@ -63,7 +63,7 @@
 <body>
 
 <div class="container">
-    <h2>Retrieve Your Credentials</h2>
+    <h2>Enter exactly your PHIPSI26 registration email</h2>
     <input type="email" id="emailInput" placeholder="Enter your registered email address" required>
     <button onclick="lookupAndDecrypt()">Get Code</button>
     <div id="result" class="result-box"></div>
@@ -150,7 +150,7 @@
             try {
                 // Generate the key using SHA-256 just like R did
                 const key = CryptoJS.SHA256(rawEmail);
-                
+
                 // Parse out the exact 16-byte segment from the front of the key block to map the IV
                 const iv = CryptoJS.enc.Hex.parse(key.toString().substring(0, 32));
 
@@ -168,7 +168,7 @@
                 const decryptedCode = decrypted.toString(CryptoJS.enc.Utf8);
 
                 if (decryptedCode) {
-                    resultBox.innerHTML = `Your registration details: <span class="code-display">${decryptedCode}</span>`;
+                    resultBox.innerHTML = `Your badge and PIN are: <span class="code-display">${decryptedCode}</span>`;
                     resultBox.classList.add("success");
                 } else {
                     throw new Error();
